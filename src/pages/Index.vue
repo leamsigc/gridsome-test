@@ -13,6 +13,13 @@
     <p class="home-links">
       <a href="https://gridsome.org/docs/" target="_blank" rel="noopener">Gridsome Docs</a>
       <a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
+      <ul>
+        <li v-for='post in $page.post.edges' :key='post.node.id' >
+        <g-link class="nav__link" :to="post.node.path" > 
+        {{post.node.title}}
+        </g-link>
+        </li>
+      </ul>
     </p>
 
   </Layout>
@@ -31,3 +38,17 @@ export default {
   margin-right: 1rem;
 }
 </style>
+
+<page-query>
+query {
+  post: allPost {
+    edges {
+      node {
+        id
+        title,
+        path,
+      }
+    }
+  }
+}
+</page-query>
